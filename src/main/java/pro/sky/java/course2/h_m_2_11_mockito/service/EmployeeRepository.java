@@ -5,7 +5,7 @@ import pro.sky.java.course2.h_m_2_11_mockito.model.Employee;
 
 import java.util.Collection;
 
-public interface EmployeeService {
+public interface EmployeeRepository {
     Employee add(String lastName, String firstName, int department, double salary);
 
 
@@ -13,6 +13,8 @@ public interface EmployeeService {
 
     Employee find(String lastName, String firstName);
 
-    Collection<Employee> print();
+
+    Collection<Employee> findAll();
+
 }
 
