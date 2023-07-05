@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface DepartmentService {
-    int sumSalariesByDepartment (int department);
+    double sumSalariesByDepartment (int department);
     Optional<Employee> maxSalaryForDepartment(int department);
 
     Optional<Employee> minSalaryForDepartment(int department);

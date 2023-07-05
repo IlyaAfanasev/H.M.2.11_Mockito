@@ -18,13 +18,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public int sumSalariesByDepartment(int department) {
-
-        int sum=0;
-        for (Employee employee : employeeRepository.findAll()) {
-            sum+=employee.getSalary();
-        }
-        return sum;
+    public double sumSalariesByDepartment(int department) {
+        return employeeRepository.findAll()
+                .stream()
+                .filter(e -> e.getDepartment() == department)
+                .mapToDouble(Employee::getSalary).sum();
 
 
     }

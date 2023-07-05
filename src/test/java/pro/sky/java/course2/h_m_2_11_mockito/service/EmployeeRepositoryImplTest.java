@@ -12,11 +12,13 @@ public class EmployeeRepositoryImplTest {
     private final EmployeeRepositoryImpl out =new EmployeeRepositoryImpl();
     @Test
     public void shouldReturnCorrectResultFromMethodAdd() {
-        Employee expected = new Employee("Афанасьев", "Илья", 1, 35000);
+        Employee expected =
+                new Employee("Афанасьев", "Илья", 1, 35000);
         Employee actual = out.add("Афанасьев", "Илья", 1, 35000);
         assertEquals(expected, actual);
 
-        Employee expected2 = new Employee("Рочев", "Александр", 2, 38000);
+        Employee expected2 =
+                new Employee("Рочев", "Александр", 2, 38000);
         Employee actual2 = out.add("Рочев", "Александр", 2, 38000);
         assertEquals(expected2, actual2);
     }
@@ -24,7 +26,8 @@ public class EmployeeRepositoryImplTest {
     @Test
     public void shouldThrowEmployeeAlreadyAddedFromMethodAdd() {
         out.add("Афанасьев", "Илья", 1, 35000);
-        assertThrows(Exception.class, ()->out.add("Афанасьев", "Илья", 1, 35000));
+        assertThrows(Exception.class,
+                ()->out.add("Афанасьев", "Илья", 3, 38000));
 
 
 
