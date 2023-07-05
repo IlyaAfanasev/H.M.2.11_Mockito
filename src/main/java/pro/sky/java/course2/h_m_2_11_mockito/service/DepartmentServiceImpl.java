@@ -19,6 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public int sumSalariesByDepartment(int department) {
+
         int sum=0;
         for (Employee employee : employeeRepository.findAll()) {
             sum+=employee.getSalary();
