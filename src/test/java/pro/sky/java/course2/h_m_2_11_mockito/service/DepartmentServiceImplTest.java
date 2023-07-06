@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.java.course2.h_m_2_11_mockito.constant.EmployeeConstants;
+import pro.sky.java.course2.h_m_2_11_mockito.exceptoins.IncorrectDepartmentException;
 import pro.sky.java.course2.h_m_2_11_mockito.model.Employee;
 
 import java.util.Optional;
@@ -36,11 +37,20 @@ public class DepartmentServiceImplTest {
 
         assertEquals(expectedMethodSum, out.sumSalariesByDepartment(2));
 
-        verify(repositoryMock, times(1)).findAll();
-
+        verify(repositoryMock, times(2)).findAll();
 
 
     }
+
+    @Test
+    public void shouldThrowExceptionFromMethodSumWhenDepartmentIncorrect() {
+        when(repositoryMock.findAll())
+                .thenReturn(FIND_ALL_COLLECTION);
+        assertThrows(IncorrectDepartmentException.class, () -> out.sumSalariesByDepartment(4));
+
+        verify(repositoryMock, times(1)).findAll();
+    }
+
     @Test
     public void shouldReturnCorrectResultFromMethodsMaxMinSalaries() {
         when(repositoryMock.findAll())
@@ -48,6 +58,17 @@ public class DepartmentServiceImplTest {
 
         assertEquals(EMPLOYEE_WHIT_MAX_SALARY_IN_DEPARTMENT_2, out.maxSalaryForDepartment(2));
         assertEquals(EMPLOYEE_WHIT_MIN_SALARY_IN_DEPARTMENT_2, out.minSalaryForDepartment(2));
+
+        verify(repositoryMock, times(4)).findAll();
+    }
+
+    @Test
+    public void shouldThrowExceptionFromMethodMaxMinWhenDepartmentIncorrect() {
+        when(repositoryMock.findAll())
+                .thenReturn(FIND_ALL_COLLECTION);
+
+        assertThrows(IncorrectDepartmentException.class, () -> out.maxSalaryForDepartment(4));
+        assertThrows(IncorrectDepartmentException.class, () -> out.minSalaryForDepartment(4));
 
         verify(repositoryMock, times(2)).findAll();
     }
@@ -59,8 +80,20 @@ public class DepartmentServiceImplTest {
 
         assertEquals(EMPLOYEES_OF_DEPARTMENT_2, out.getAllEmployeesDepartment(2));
 
+        verify(repositoryMock, times(2)).findAll();
+    }
+
+    @Test
+    public void shouldThrowExceptionFromMethodGetAllEmployeesDepartmentWhenDepartmentIncorrect() {
+        when(repositoryMock.findAll())
+                .thenReturn(FIND_ALL_COLLECTION);
+
+        assertThrows(IncorrectDepartmentException.class, () -> out.getAllEmployeesDepartment(4));
+
+
         verify(repositoryMock, times(1)).findAll();
     }
+
 
     @Test
     public void shouldReturnCorrectResultFromMethodGetAllEmployees() {

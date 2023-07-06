@@ -9,7 +9,8 @@ import pro.sky.java.course2.h_m_2_11_mockito.model.Employee;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EmployeeRepositoryImplTest {
-    private final EmployeeRepositoryImpl out =new EmployeeRepositoryImpl();
+    private final EmployeeRepositoryImpl out = new EmployeeRepositoryImpl();
+
     @Test
     public void shouldReturnCorrectResultFromMethodAdd() {
         Employee expected =
@@ -27,8 +28,7 @@ public class EmployeeRepositoryImplTest {
     public void shouldThrowEmployeeAlreadyAddedFromMethodAdd() {
         out.add("Афанасьев", "Илья", 1, 35000);
         assertThrows(Exception.class,
-                ()->out.add("Афанасьев", "Илья", 3, 38000));
-
+                () -> out.add("Афанасьев", "Илья", 3, 38000));
 
 
     }
@@ -39,9 +39,10 @@ public class EmployeeRepositoryImplTest {
         Employee actual = out.remove("Афанасьев", "Илья");
         assertEquals(expected, actual);
     }
+
     @Test
     public void shouldThrowEmployeeNotFoundFromMethodRemove() {
-        assertThrows(EmployeeNotFound.class, ()-> out.remove("Афанасьев", "Илья"));
+        assertThrows(EmployeeNotFound.class, () -> out.remove("Афанасьев", "Илья"));
     }
 
     @Test
@@ -53,7 +54,7 @@ public class EmployeeRepositoryImplTest {
 
     @Test
     public void shouldThrowEmployeeNotFoundFromMethodFind() {
-        assertThrows(EmployeeNotFound.class, ()-> out.find("Афанасьев", "Илья"));
+        assertThrows(EmployeeNotFound.class, () -> out.find("Афанасьев", "Илья"));
     }
 
 }

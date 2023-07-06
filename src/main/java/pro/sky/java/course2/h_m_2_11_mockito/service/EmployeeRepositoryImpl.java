@@ -11,9 +11,11 @@ import java.util.*;
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     private final Map<String, Employee> employeesMap;
+
     public EmployeeRepositoryImpl() {
-    this.employeesMap =new HashMap<>();
+        this.employeesMap = new HashMap<>();
     }
+
     @Override
     public Employee add(String lastName, String firstName, int department, double salary) {
         Employee employee = new Employee(lastName, firstName, department, salary);
@@ -44,7 +46,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public Collection <Employee> findAll() {
+    public Collection<Employee> findAll() {
         return Collections.unmodifiableCollection(employeesMap.values());
     }
 }
