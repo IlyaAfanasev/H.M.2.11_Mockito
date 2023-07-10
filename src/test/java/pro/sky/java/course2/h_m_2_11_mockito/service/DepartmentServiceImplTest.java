@@ -1,6 +1,7 @@
 package pro.sky.java.course2.h_m_2_11_mockito.service;
 
 import net.bytebuddy.dynamic.DynamicType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,10 +26,15 @@ public class DepartmentServiceImplTest {
     @InjectMocks
     private DepartmentServiceImpl out;
 
-    @Test
-    public void shouldReturnCorrectResultFromMethodSumSalaries() {
+    @BeforeEach
+    public void setUp() {
         when(repositoryMock.findAll())
                 .thenReturn(FIND_ALL_COLLECTION);
+    }
+
+    @Test
+    public void shouldReturnCorrectResultFromMethodSumSalaries() {
+
 
         double expectedMethodSum = FIND_ALL_COLLECTION.stream()
                 .filter(e -> e.getDepartment() == 2)
@@ -44,8 +50,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void shouldThrowExceptionFromMethodSumWhenDepartmentIncorrect() {
-        when(repositoryMock.findAll())
-                .thenReturn(FIND_ALL_COLLECTION);
+
         assertThrows(IncorrectDepartmentException.class, () -> out.sumSalariesByDepartment(4));
 
         verify(repositoryMock, times(1)).findAll();
@@ -53,8 +58,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void shouldReturnCorrectResultFromMethodsMaxMinSalaries() {
-        when(repositoryMock.findAll())
-                .thenReturn(FIND_ALL_COLLECTION);
+
 
         assertEquals(EMPLOYEE_WHIT_MAX_SALARY_IN_DEPARTMENT_2, out.maxSalaryForDepartment(2));
         assertEquals(EMPLOYEE_WHIT_MIN_SALARY_IN_DEPARTMENT_2, out.minSalaryForDepartment(2));
@@ -64,8 +68,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void shouldThrowExceptionFromMethodMaxMinWhenDepartmentIncorrect() {
-        when(repositoryMock.findAll())
-                .thenReturn(FIND_ALL_COLLECTION);
+
 
         assertThrows(IncorrectDepartmentException.class, () -> out.maxSalaryForDepartment(4));
         assertThrows(IncorrectDepartmentException.class, () -> out.minSalaryForDepartment(4));
@@ -75,8 +78,6 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void shouldReturnCorrectResultFromMethodGetAllEmployeesDepartment() {
-        when(repositoryMock.findAll())
-                .thenReturn(FIND_ALL_COLLECTION);
 
         assertEquals(EMPLOYEES_OF_DEPARTMENT_2, out.getAllEmployeesDepartment(2));
 
@@ -85,8 +86,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void shouldThrowExceptionFromMethodGetAllEmployeesDepartmentWhenDepartmentIncorrect() {
-        when(repositoryMock.findAll())
-                .thenReturn(FIND_ALL_COLLECTION);
+
 
         assertThrows(IncorrectDepartmentException.class, () -> out.getAllEmployeesDepartment(4));
 
@@ -97,8 +97,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void shouldReturnCorrectResultFromMethodGetAllEmployees() {
-        when(repositoryMock.findAll())
-                .thenReturn(FIND_ALL_COLLECTION);
+
         assertEquals(MAP_FROM_METHOD_GET_ALL_EMPLOYEES, out.getAllEmployees());
     }
 
